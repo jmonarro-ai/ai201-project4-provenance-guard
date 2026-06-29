@@ -37,12 +37,9 @@
 ### Label Thresholds
 | Score Range | Attribution Result | Label Variant |
 |---|---|---|
-| 0.85 – 1.00 | likely_ai | High-Confidence AI |
-| 0.50 – 0.84 | likely_ai | Uncertain (leaning AI) |
-| 0.35 – 0.49 | uncertain | Uncertain |
-| 0.15 – 0.34 | likely_human | Uncertain (leaning human) |
-| 0.00 – 0.14 | likely_human | High-Confidence Human |
-
+| 0.70 – 1.00 | likely_ai | High-Confidence AI |
+| 0.26 – 0.69 | uncertain | Uncertain |
+| 0.00 – 0.25 | likely_human | High-Confidence Human |
 ### What 0.6 Means
 A confidence score of 0.60 means the system leans toward AI-generated but is not confident enough to say so definitively. The label will communicate uncertainty clearly and remind the reader that the creator can appeal.
 

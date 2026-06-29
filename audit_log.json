@@ -1,0 +1,41 @@
+[
+  {
+    "content_id": "6cf48452-92ce-4590-a039-9b50e4833013",
+    "creator_id": "test-user-1",
+    "timestamp": "2026-06-29T00:25:59.406239+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.34,
+    "llm_score": 0.34,
+    "llm_reasoning": "The text has a poetic and descriptive tone, but the sentence structure and vocabulary, although smooth, do not exhibit overly generic patterns or excessive use of connective phrases typically seen in AI-generated content.",
+    "style_score": null,
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "4cc489b9-14ec-4653-bde9-d17e0e5049f6",
+    "creator_id": "test-user-2",
+    "timestamp": "2026-06-29T00:27:12.213262+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.85,
+    "llm_score": 0.85,
+    "llm_reasoning": "The text's smooth and generic phrasing, consistent structural uniformity, and overuse of connective phrases like 'Furthermore' suggest a high likelihood of AI generation.",
+    "style_score": null,
+    "label": "Likely AI-Generated",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "bffe884d-3183-4e99-8ac4-ab3dd2365c82",
+    "creator_id": "test-user-3",
+    "timestamp": "2026-06-29T00:29:41.997232+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.12,
+    "llm_score": 0.12,
+    "llm_reasoning": "The text's use of colloquial expressions, informal tone, and personal opinions, such as 'ok so', 'honestly?', and 'probably wont go back unless someone drags me there', suggest a high likelihood of human authorship.",
+    "style_score": null,
+    "label": "Likely Human-Written",
+    "status": "classified",
+    "appeal_reasoning": null
+  }
+]

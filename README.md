@@ -4,6 +4,9 @@ A Flask API for AI content attribution. Any creative sharing platform can plug i
 
 ---
 
+## Portfolio Walkthrough
+[Watch the walkthrough video here](https://www.loom.com/share/f32f166b8f31446a8757d1aa8557efd6)
+
 ## Architecture Overview
 
 When a creator submits text via `POST /submit`, it passes through two independent detection signals — a Groq LLM classifier and a stylometric heuristics analyzer. Their scores are combined into a single weighted confidence score (60% LLM, 40% stylometrics). That score drives a transparency label generator which produces one of three plain-language labels. The full decision is written to a structured JSON audit log before the response is returned to the caller.

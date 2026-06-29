@@ -37,5 +37,149 @@
     "label": "Likely Human-Written",
     "status": "classified",
     "appeal_reasoning": null
+  },
+  {
+    "content_id": "f4bcb145-3462-403e-bf4a-dec4fa726e69",
+    "creator_id": "test-m4-1",
+    "timestamp": "2026-06-29T00:57:55.005767+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.7042,
+    "llm_score": 0.85,
+    "llm_reasoning": "The text's smooth and generic phrasing, consistent structural uniformity, and overuse of connective phrases like 'Furthermore' suggest a high likelihood of AI generation.",
+    "style_score": 0.4854,
+    "style_breakdown": {
+      "sentence_variance_score": 0.4563,
+      "ttr_score": 0.0,
+      "punct_score": 1.0
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "f605241c-96bf-4a11-a9a0-35ae38ae5ce9",
+    "creator_id": "test-m4-2",
+    "timestamp": "2026-06-29T00:58:04.282251+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.2248,
+    "llm_score": 0.12,
+    "llm_reasoning": "The text's use of colloquial expressions, informal tone, and personal opinions, such as 'ok so', 'honestly?', and 'probably wont go back unless someone drags me there', suggest a high likelihood of human authorship.",
+    "style_score": 0.382,
+    "style_breakdown": {
+      "sentence_variance_score": 0.3277,
+      "ttr_score": 0.0,
+      "punct_score": 0.8182
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "418c3681-1347-4269-ad0f-8f41106fe8a2",
+    "creator_id": "test-m4-3",
+    "timestamp": "2026-06-29T00:58:50.937156+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.7033,
+    "llm_score": 0.85,
+    "llm_reasoning": "The text exhibits a smooth and generic phrasing pattern, lacks personal voice and idiosyncrasies, and uses formal vocabulary, which are characteristic of AI-generated content.",
+    "style_score": 0.4833,
+    "style_breakdown": {
+      "sentence_variance_score": 0.45,
+      "ttr_score": 0.0,
+      "punct_score": 1.0
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "73d440fc-be87-4a70-87b7-1d2a57f79ab3",
+    "creator_id": "test-m4-4",
+    "timestamp": "2026-06-29T00:59:11.666416+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.3841,
+    "llm_score": 0.42,
+    "llm_reasoning": "The text has a somewhat informal tone and lacks overly generic phrasing, but its concise and straightforward structure suggests a possible AI influence, though the presence of a personal reflection and a nuanced topic discussion leans towards human authorship.",
+    "style_score": 0.3302,
+    "style_breakdown": {
+      "sentence_variance_score": 0.5033,
+      "ttr_score": 0.0,
+      "punct_score": 0.4872
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "5f30c97c-0dd8-4b20-85c3-0e0c72c37e3a",
+    "creator_id": "test-m4-1",
+    "timestamp": "2026-06-29T01:07:13.226475+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.7066,
+    "llm_score": 0.85,
+    "llm_reasoning": "The text exhibits a smooth and generic phrasing pattern, consistent structural uniformity, and overuses connective phrases like 'Furthermore', which are characteristic of AI-generated content.",
+    "style_score": 0.4915,
+    "style_breakdown": {
+      "sentence_variance_score": 0.4563,
+      "ttr_score": 0.0181,
+      "punct_score": 1.0
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "de061828-8b9a-44f4-b42b-5cd7f1edf7e0",
+    "creator_id": "test-m4-2",
+    "timestamp": "2026-06-29T01:07:24.797988+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.2288,
+    "llm_score": 0.12,
+    "llm_reasoning": "The text's use of colloquial expressions, informal tone, and personal opinions, such as 'ok so', 'honestly?', and 'probably wont go back unless someone drags me there', suggest a high likelihood of human authorship.",
+    "style_score": 0.3921,
+    "style_breakdown": {
+      "sentence_variance_score": 0.3277,
+      "ttr_score": 0.0303,
+      "punct_score": 0.8182
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "f7d9558c-0c0a-45f0-8337-719d77f1ae74",
+    "creator_id": "test-m4-3",
+    "timestamp": "2026-06-29T01:07:35.337479+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.7092,
+    "llm_score": 0.85,
+    "llm_reasoning": "The text exhibits a smooth and generic phrasing pattern, lacks personal voice and idiosyncrasies, and uses formal vocabulary, which are characteristic of AI-generated content.",
+    "style_score": 0.498,
+    "style_breakdown": {
+      "sentence_variance_score": 0.45,
+      "ttr_score": 0.0439,
+      "punct_score": 1.0
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
+  },
+  {
+    "content_id": "dc1b814a-c438-4372-98d0-fe008a8fb524",
+    "creator_id": "test-m4-4",
+    "timestamp": "2026-06-29T01:07:45.988052+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.3844,
+    "llm_score": 0.42,
+    "llm_reasoning": "The text has a somewhat informal tone and lacks overly generic phrasing, but its concise and straightforward structure suggests a possible AI influence, though not strongly enough to rule out human authorship.",
+    "style_score": 0.3311,
+    "style_breakdown": {
+      "sentence_variance_score": 0.5033,
+      "ttr_score": 0.0028,
+      "punct_score": 0.4872
+    },
+    "label": "Attribution Uncertain",
+    "status": "classified",
+    "appeal_reasoning": null
   }
 ]

@@ -114,18 +114,75 @@ Where ai_probability is:
         return 0.5, "Error during LLM analysis — defaulting to uncertain"
 
 
+
 # ─────────────────────────────────────────
-# CONFIDENCE SCORING (placeholder for M4)
+# SIGNAL 2: STYLOMETRIC HEURISTICS
 # ─────────────────────────────────────────
 
-def get_confidence_score(llm_score, style_score=None):
+def get_style_score(text):
     """
-    Combine signals into a final confidence score.
-    In M3: uses only llm_score as placeholder.
-    In M4: will use 60% LLM + 40% stylometrics.
+    Compute stylometric heuristics to detect AI-generated text.
+    Measures 3 properties:
+    1. Sentence length variance (low variance = AI-like)
+    2. Type-token ratio (low TTR = AI-like)
+    3. Punctuation density (low density = AI-like)
+    Returns a float 0.0-1.0 where 1.0 = very AI-like, 0.0 = very human-like.
     """
-    if style_score is None:
-        return round(llm_score, 4)
+    import re
+    import math
+
+    # ── Sentence length variance ──
+    sentences = re.split(r'[.!?]+', text)
+    sentences = [s.strip() for s in sentences if s.strip()]
+
+    if len(sentences) < 2:
+        # Too short to measure variance reliably
+        sentence_variance_score = 0.5
+    else:
+        lengths = [len(s.split()) for s in sentences]
+        mean_len = sum(lengths) / len(lengths)
+        variance = sum((l - mean_len) ** 2 for l in lengths) / len(lengths)
+        std_dev = math.sqrt(variance)
+        # High std_dev = human-like variation, low = AI-like uniformity
+        # Normalize: std_dev of 0-3 = AI-like (score near 1.0), 10+ = human-like (score near 0.0)
+        sentence_variance_score = max(0.0, min(1.0, 1.0 - (std_dev / 10.0)))
+
+    # ── Type-token ratio (TTR) ──
+    words = re.findall(r'\b\w+\b', text.lower())
+    if len(words) == 0:
+        ttr_score = 0.5
+    else:
+        unique_words = set(words)
+        ttr = len(unique_words) / len(words)
+        # High TTR = human-like diversity, low TTR = AI-like repetition
+        # TTR below 0.6 = AI-like (score near 1.0), above 0.85 = human-like (score near 0.0)
+        ttr_score = max(0.0, min(1.0, 1.0 - (ttr / 0.9)))
+    # ── Punctuation density ──
+    punctuation_marks = re.findall(r'[!?;:\-—…"]', text)
+    word_count = len(words) if len(words) > 0 else 1
+    punct_density = len(punctuation_marks) / word_count
+    # Low punctuation density = AI-like (score near 1.0), high = human-like (score near 0.0)
+    # density of 0 = AI-like, 0.1+ = human-like
+    punct_score = max(0.0, min(1.0, 1.0 - (punct_density / 0.1)))
+
+    # ── Combine three metrics into one style score ──
+    style_score = round((sentence_variance_score + ttr_score + punct_score) / 3, 4)
+    return style_score, {
+        "sentence_variance_score": round(sentence_variance_score, 4),
+        "ttr_score": round(ttr_score, 4),
+        "punct_score": round(punct_score, 4),
+    }
+
+
+# ─────────────────────────────────────────
+# CONFIDENCE SCORING
+# ─────────────────────────────────────────
+
+def get_confidence_score(llm_score, style_score):
+    """
+    Combine LLM and stylometric signals into a final confidence score.
+    Weighting: 60% LLM + 40% stylometrics (as defined in planning.md)
+    """
     return round((llm_score * 0.60) + (style_score * 0.40), 4)
 
 
@@ -186,16 +243,20 @@ def submit():
     content_id = str(uuid.uuid4())
     timestamp = datetime.now(timezone.utc).isoformat()
 
-    # Run Signal 1: Groq LLM
+   # Run Signal 1: Groq LLM
     llm_score, llm_reasoning = get_llm_score(text)
 
-    # Confidence score (M3: LLM only, M4: will add stylometrics)
-    confidence = get_confidence_score(llm_score)
+    # Run Signal 2: Stylometric heuristics
+    style_score, style_breakdown = get_style_score(text)
+
+    # Confidence score: 60% LLM + 40% stylometrics
+    confidence = get_confidence_score(llm_score, style_score)
 
     # Attribution result and label
     attribution = get_attribution(confidence)
     label = get_label(confidence)
 
+    # Write to audit log
     # Write to audit log
     log_entry = {
         "content_id": content_id,
@@ -205,7 +266,8 @@ def submit():
         "confidence": confidence,
         "llm_score": llm_score,
         "llm_reasoning": llm_reasoning,
-        "style_score": None,
+        "style_score": style_score,
+        "style_breakdown": style_breakdown,
         "label": label,
         "status": "classified",
         "appeal_reasoning": None,
@@ -219,6 +281,8 @@ def submit():
         "confidence": confidence,
         "label": label,
         "llm_score": llm_score,
+        "style_score": style_score,
+        "style_breakdown": style_breakdown,
         "timestamp": timestamp,
     })
 
@@ -241,4 +305,3 @@ def get_log():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    

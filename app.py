@@ -301,6 +301,53 @@ def submit():
         "timestamp": timestamp,
     })
 
+@app.route("/dashboard", methods=["GET"])
+def dashboard():
+    """
+    GET /dashboard
+    Returns analytics metrics:
+    - AI vs Human verdict ratio
+    - Appeal rate
+    - Average confidence score
+    """
+    entries = read_log()
+
+    # Filter to only submission entries (not appeals)
+    submissions = [e for e in entries if e.get("attribution") is not None]
+    total = len(submissions)
+
+    if total == 0:
+        return jsonify({"message": "No submissions yet.", "total_submissions": 0})
+
+    # Metric 1: AI vs Human verdict ratio
+    ai_count = sum(1 for e in submissions if e.get("attribution") == "likely_ai")
+    human_count = sum(1 for e in submissions if e.get("attribution") == "likely_human")
+    ai_ratio = round(ai_count / total, 4)
+    human_ratio = round(human_count / total, 4)
+
+    # Metric 2: Appeal rate
+    appealed = sum(1 for e in submissions if e.get("status") == "under_review")
+    appeal_rate = round(appealed / total, 4)
+
+    # Metric 3: Average confidence score
+    confidences = [e.get("confidence", 0) for e in submissions]
+    avg_confidence = round(sum(confidences) / len(confidences), 4)
+
+    return jsonify({
+        "total_submissions": total,
+        "verdicts": {
+            "likely_ai": ai_count,
+            "likely_human": human_count,
+            "ai_ratio": ai_ratio,
+            "human_ratio": human_ratio,
+        },
+        "appeal_rate": {
+            "total_appeals": appealed,
+            "rate": appeal_rate,
+        },
+        "average_confidence": avg_confidence,
+    })
+
 @app.route("/appeal", methods=["POST"])
 def appeal():
     """
